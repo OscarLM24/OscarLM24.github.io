@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para mi Solecito ☀️💖</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Great+Vibes&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        rose: {
+                            50: '#fff1f2',
+                            100: '#ffe4e6',
+                            200: '#fecdd3',
+                            300: '#fda4af',
+                            400: '#fb7185',
+                            500: '#f43f5e',
+                            600: '#e11d48',
+                        },
+                        blush: {
+                            light: '#fff5f7',
+                            soft: '#fbe4e8',
+                            medium: '#f7cad0',
+                            deep: '#f7aef8'
+                        }
+                    },
+                    fontFamily: {
+                        handwriting: ['Caveat', 'cursive'],
+                        cursive: ['Great Vibes', 'cursive'],
+                        sans: ['Quicksand', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #fff0f5 0%, #ffd1dc 50%, #ffe4e1 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            font-family: 'Quicksand', sans-serif;
+        }
+
+        /* Ambient Glow & Sparkles */
+        .sparkle {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0;
+            animation: sparkleAnim 3s infinite ease-in-out;
+        }
+
+        @keyframes sparkleAnim {
+            0% { transform: scale(0) rotate(0deg); opacity: 0; }
+            50% { transform: scale(1) rotate(180deg); opacity: 0.8; }
+            100% { transform: scale(0) rotate(360deg); opacity: 0; }
+        }
+
+        /* Floating Particles */
+        .heart-particle {
+            position: fixed;
+            pointer-events: none;
+            z-index: 10;
+            animation: floatUp 6s linear forwards;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) scale(0.5) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-10vh) scale(1.2) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Envelope Styles & Animation */
+        .envelope-wrapper {
+            perspective: 1000px;
+            cursor: pointer;
+        }
+
+        .envelope {
+            width: 320px;
+            height: 220px;
+            background-color: #fca5a5; /* Deep soft pink */
+            position: relative;
+            border-bottom-left-radius: 12px;
+            border-bottom-right-radius: 12px;
+            box-shadow: 0 15px 35px rgba(244, 63, 94, 0.25), 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        @media (min-width: 640px) {
+            .envelope {
+                width: 420px;
+                height: 280px;
+            }
+        }
+
+        .envelope:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(244, 63, 94, 0.35);
+        }
+
+        /* Top flap */
+        .flap-top {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 160px solid transparent;
+            border-right: 160px solid transparent;
+            border-top: 130px solid #f87171; /* Darker accent pink */
+            transform-origin: top;
+            transition: transform 0.6s ease-in-out;
+            z-index: 4;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+        }
+
+        @media (min-width: 640px) {
+            .flap-top {
+                border-left-width: 210px;
+                border-right-width: 210px;
+                border-top-width: 165px;
+            }
+        }
+
+        /* Side & Bottom Flaps */
+        .flap-left {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-top: 110px solid transparent;
+            border-bottom: 110px solid transparent;
+            border-left: 170px solid #fca5a5;
+            z-index: 3;
+            border-bottom-left-radius: 12px;
+        }
+
+        @media (min-width: 640px) {
+            .flap-left {
+                border-top-width: 140px;
+                border-bottom-width: 140px;
+                border-left-width: 220px;
+            }
+        }
+
+        .flap-right {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 0;
+            height: 0;
+            border-top: 110px solid transparent;
+            border-bottom: 110px solid transparent;
+            border-right: 170px solid #fca5a5;
+            z-index: 3;
+            border-bottom-right-radius: 12px;
+        }
+
+        @media (min-width: 640px) {
+            .flap-right {
+                border-top-width: 140px;
+                border-bottom-width: 140px;
+                border-right-width: 220px;
+            }
+        }
+
+        .flap-bottom {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 160px solid transparent;
+            border-right: 160px solid transparent;
+            border-bottom: 120px solid #f87171;
+            z-index: 3;
+            border-bottom-left-radius: 12px;
+            border-bottom-right-radius: 12px;
+        }
+
+        @media (min-width: 640px) {
+            .flap-bottom {
+                border-left-width: 210px;
+                border-right-width: 210px;
+                border-bottom-width: 150px;
+            }
+        }
+
+        /* The Card inside */
+        .letter-card {
+            position: absolute;
+            bottom: 10px;
+            left: 5%;
+            width: 90%;
+            height: 90%;
+            background: #fffdfa;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), z-index 0.8s;
+            z-index: 2;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border: 2px dashed #fecdd3;
+            background-image: radial-gradient(#fff1f2 1px, transparent 0);
+            background-size: 16px 16px;
+        }
+
+        /* Wax Seal */
+        .wax-seal {
+            position: absolute;
+            top: 110px;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 54px;
+            height: 54px;
+            background: linear-gradient(135deg, #fb7185, #e11d48);
+            border-radius: 50%;
+            z-index: 5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(225, 29, 72, 0.4), inset 0 2px 4px rgba(255,255,255,0.4);
+            transition: transform 0.4s ease, opacity 0.4s ease;
+        }
+
+        @media (min-width: 640px) {
+            .wax-seal {
+                top: 135px;
+                width: 64px;
+                height: 64px;
+            }
+        }
+
+        .wax-seal i {
+            color: white;
+            font-size: 1.5rem;
+            filter: drop-shadow(0 1px 2px rgba(0,0,0,0.2));
+        }
+
+        /* Open State */
+        .envelope-wrapper.open .flap-top {
+            transform: rotateX(180deg);
+            z-index: 1;
+        }
+
+        .envelope-wrapper.open .wax-seal {
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(0.5);
+            pointer-events: none;
+        }
+
+        .envelope-wrapper.open .letter-card {
+            transform: translateY(-160px) scale(1.05);
+            z-index: 10;
+            height: auto;
+            min-height: 260px;
+            box-shadow: 0 20px 40px rgba(244, 63, 94, 0.25);
+        }
+
+        @media (min-width: 640px) {
+            .envelope-wrapper.open .letter-card {
+                transform: translateY(-210px) scale(1.08);
+                min-height: 300px;
+            }
+        }
+
+        /* Soft Pulse for Prompt */
+        @keyframes pulseSoft {
+            0%, 100% { transform: scale(1); opacity: 0.9; }
+            50% { transform: scale(1.05); opacity: 1; }
+        }
+
+        .pulse-prompt {
+            animation: pulseSoft 2s infinite ease-in-out;
+        }
+
+        /* Ribbon Ribbon decoration */
+        .ribbon-shine {
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.4), transparent);
+            transform: skewX(-25deg);
+            animation: shine 4s infinite;
+        }
+
+        @keyframes shine {
+            100% { left: 200%; }
+        }
+    </style>
+</head>
+<body class="flex flex-col items-center justify-between p-4 md:p-8 relative">
+
+    <!-- Ambient Sparkles Canvas/Elements Container -->
+    <div id="sparkle-container" class="fixed inset-0 pointer-events-none z-0"></div>
+
+    <!-- Header Section -->
+    <header class="text-center mt-6 z-10 transition-all duration-500">
+        <div class="inline-flex items-center gap-2 bg-white/60 backdrop-blur-md px-4 py-1.5 rounded-full border border-rose-200 shadow-sm mb-3">
+            <i class="fa-solid fa-sun text-amber-400 animate-spin" style="animation-duration: 12s;"></i>
+            <span class="text-xs sm:text-sm text-rose-500 font-semibold tracking-wider uppercase">Un mensaje de mi alma</span>
+            <i class="fa-solid fa-heart text-rose-400 text-xs"></i>
+        </div>
+        <h1 class="font-cursive text-4xl sm:text-6xl text-rose-600 drop-shadow-sm mb-1">
+            Solo para ti
+        </h1>
+        <p id="instruction-text" class="text-rose-400 text-sm sm:text-base font-medium pulse-prompt">
+            ✨ Toca el sobre para abrir la notita ✨
+        </p>
+    </header>
+
+    <!-- Main Content: Interactive Envelope -->
+    <main class="my-auto py-24 sm:py-32 z-10 flex items-center justify-center w-full">
+        <div id="envelopeWrapper" class="envelope-wrapper relative">
+            <div class="envelope">
+                <div class="flap-top"></div>
+                <div class="flap-left"></div>
+                <div class="flap-right"></div>
+                <div class="flap-bottom"></div>
+                
+                <!-- Wax Seal Stamp -->
+                <div class="wax-seal">
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+
+                <!-- Inner Folded Letter -->
+                <div class="letter-card text-center relative overflow-hidden">
+                    <div class="ribbon-shine"></div>
+                    
+                    <!-- Decorative Corner Hearts -->
+                    <i class="fa-solid fa-heart text-rose-200 text-xs absolute top-2 left-2"></i>
+                    <i class="fa-solid fa-heart text-rose-200 text-xs absolute top-2 right-2"></i>
+                    <i class="fa-solid fa-heart text-rose-200 text-xs absolute bottom-2 left-2"></i>
+                    <i class="fa-solid fa-heart text-rose-200 text-xs absolute bottom-2 right-2"></i>
+
+                    <!-- Card Header -->
+                    <div class="mb-2">
+                        <span class="text-xs uppercase tracking-widest text-rose-400 font-semibold">Nota Especial</span>
+                    </div>
+
+                    <!-- Heart Icon Divider -->
+                    <div class="flex items-center justify-center gap-2 mb-3">
+                        <div class="h-px bg-rose-200 w-8"></div>
+                        <i class="fa-solid fa-sparkles text-amber-400 text-xs"></i>
+                        <i class="fa-solid fa-sun text-amber-400 text-base"></i>
+                        <i class="fa-solid fa-sparkles text-amber-400 text-xs"></i>
+                        <div class="h-px bg-rose-200 w-8"></div>
+                    </div>
+
+                    <!-- Personalized Romantic Message -->
+                    <p class="font-handwriting text-2xl sm:text-3xl text-gray-700 leading-snug sm:leading-relaxed my-2 px-2">
+                        "Si te empecé a querer rápido es porque encajas en todo lo que algún día soñé, <span class="text-rose-500 font-bold underline decoration-rose-300 decoration-wavy">me encantas solecito</span>."
+                    </p>
+
+                    <!-- Cute Signature/Footer -->
+                    <div class="mt-4 pt-2 border-t border-rose-100 w-full flex items-center justify-center gap-1.5 text-rose-400 text-xs sm:text-sm">
+                        <span>Con todo mi cariño</span>
+                        <i class="fa-solid fa-heart text-rose-500 animate-bounce"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer / Interactive Controls -->
+    <footer class="mb-4 z-10 text-center">
+        <div id="actionButtons" class="opacity-0 transition-opacity duration-700 pointer-events-none flex flex-wrap justify-center gap-3">
+            <button onclick="createHeartBurst()" class="bg-white/80 hover:bg-white text-rose-500 border border-rose-200 px-5 py-2.5 rounded-full shadow-sm hover:shadow text-sm font-medium transition-all duration-300 flex items-center gap-2">
+                <i class="fa-solid fa-heart text-rose-400"></i>
+                Enviar abrazos
+            </button>
+            <button onclick="toggleMusic()" id="musicBtn" class="bg-rose-400 hover:bg-rose-500 text-white px-5 py-2.5 rounded-full shadow-md hover:shadow-lg text-sm font-medium transition-all duration-300 flex items-center gap-2">
+                <i class="fa-solid fa-music"></i>
+                <span id="musicText">Música Suave</span>
+            </button>
+        </div>
+        <p class="text-xs text-rose-300 mt-4 font-light">Hecho con amor &bull; Siempre con el corazón</p>
+    </footer>
+
+    <!-- Audio Element (Relaxing / Romantic Melody) -->
+    <audio id="bgMusic" loop preload="auto">
+        <!-- Royalty-free gentle romantic melody -->
+        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=lofi-study-112191.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        // DOM Elements
+        const envelopeWrapper = document.getElementById('envelopeWrapper');
+        const instructionText = document.getElementById('instruction-text');
+        const actionButtons = document.getElementById('actionButtons');
+        const bgMusic = document.getElementById('bgMusic');
+        const musicBtn = document.getElementById('musicBtn');
+        const musicText = document.getElementById('musicText');
+
+        let isOpen = false;
+        let isPlaying = false;
+
+        // Toggle Envelope Open/Close
+        envelopeWrapper.addEventListener('click', () => {
+            isOpen = !isOpen;
+            if (isOpen) {
+                envelopeWrapper.classList.add('open');
+                instructionText.textContent = '✨ Toca de nuevo para guardar la notita ✨';
+                instructionText.classList.remove('pulse-prompt');
+                
+                // Reveal buttons
+                actionButtons.classList.remove('opacity-0', 'pointer-events-none');
+                
+                // Burst of hearts on open
+                createHeartBurst();
+
+                // Try auto-play music on first interact
+                if (!isPlaying) {
+                    toggleMusic();
+                }
+            } else {
+                envelopeWrapper.classList.remove('open');
+                instructionText.textContent = '✨ Toca el sobre para abrir la notita ✨';
+                instructionText.classList.add('pulse-prompt');
+            }
+        });
+
+        // Background Sparkles Generation
+        function createSparkles() {
+            const container = document.getElementById('sparkle-container');
+            const sparkleCount = 25;
+
+            for (let i = 0; i < sparkleCount; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.classList.add('sparkle');
+                
+                const size = Math.random() * 6 + 2;
+                sparkle.style.width = `${size}px`;
+                sparkle.style.height = `${size}px`;
+                
+                sparkle.style.left = `${Math.random() * 100}%`;
+                sparkle.style.top = `${Math.random() * 100}%`;
+                sparkle.style.animationDelay = `${Math.random() * 3}s`;
+                sparkle.style.animationDuration = `${Math.random() * 2 + 2}s`;
+                
+                container.appendChild(sparkle);
+            }
+        }
+
+        // Floating Hearts Particle FX
+        function spawnFloatingHeart() {
+            const icons = ['fa-heart', 'fa-sparkles', 'fa-sun', 'fa-heart'];
+            const colors = ['#fda4af', '#f43f5e', '#fb7185', '#fcd34d'];
+            
+            const heart = document.createElement('i');
+            const randomIcon = icons[Math.floor(Math.random() * icons.length)];
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            
+            heart.className = `fa-solid ${randomIcon} heart-particle`;
+            heart.style.color = randomColor;
+            heart.style.left = `${Math.random() * 95}%`;
+            heart.style.fontSize = `${Math.random() * 14 + 10}px`;
+            heart.style.animationDuration = `${Math.random() * 3 + 4}s`;
+            
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 7000);
+        }
+
+        // Periodic floating hearts
+        setInterval(spawnFloatingHeart, 800);
+
+        // Heart Burst on click
+        function createHeartBurst() {
+            for (let i = 0; i < 15; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('i');
+                    heart.className = 'fa-solid fa-heart heart-particle';
+                    heart.style.color = '#f43f5e';
+                    
+                    // Center near envelope
+                    const rect = envelopeWrapper.getBoundingClientRect();
+                    const centerX = rect.left + rect.width / 2;
+                    const offsetX = (Math.random() - 0.5) * 200;
+                    
+                    heart.style.left = `${centerX + offsetX}px`;
+                    heart.style.fontSize = `${Math.random() * 18 + 12}px`;
+                    heart.style.animationDuration = `${Math.random() * 2 + 3}s`;
+                    
+                    document.body.appendChild(heart);
+
+                    setTimeout(() => {
+                        heart.remove();
+                    }, 5000);
+                }, i * 80);
+            }
+        }
+
+        // Music Toggle Function
+        function toggleMusic() {
+            if (isPlaying) {
+                bgMusic.pause();
+                musicText.textContent = 'Música Suave';
+                musicBtn.classList.remove('bg-rose-500');
+                musicBtn.classList.add('bg-rose-400');
+                isPlaying = false;
+            } else {
+                bgMusic.play().then(() => {
+                    musicText.textContent = 'Pausar Música';
+                    musicBtn.classList.remove('bg-rose-400');
+                    musicBtn.classList.add('bg-rose-500');
+                    isPlaying = true;
+                }).catch(err => {
+                    console.log("Audio play blocked by browser policy until interaction.", err);
+                });
+            }
+        }
+
+        // Initialize background effects on load
+        window.onload = () => {
+            createSparkles();
+        };
+    </script>
+</body>
+</html>
